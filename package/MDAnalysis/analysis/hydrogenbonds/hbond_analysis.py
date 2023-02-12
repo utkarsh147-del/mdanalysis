@@ -116,8 +116,11 @@ the universe may be used to guess the atoms. For example, find hydrogens and acc
   u = MDAnalysis.Universe(psf, trajectory)
 
   hbonds = HBA(universe=u)
-  hbonds.hydrogens_sel = hbonds.guess_hydrogens("protein")
-  hbonds.acceptors_sel = hbonds.guess_acceptors("protein")
+  hydrogens = u.select_atoms("protein")
+  acceptors = u.select_atoms("protein")
+  hbonds = HBA(universe=u)
+  hbonds.hydrogens_sel = hydrogens
+  hbonds.acceptors_sel = acceptors
   hbonds.run()
 
 Slightly more complex selection strings are also possible. For example, to find hydrogen bonds involving a protein and
